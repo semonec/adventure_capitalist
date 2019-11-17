@@ -52,7 +52,7 @@ const Business: React.FC<BusinessProps> = (props) => {
 
   return (
     <div className='business'>
-        <FontAwesomeIcon className='icon' icon={faLemon} onClick={HandleProcess}/>
+        <FontAwesomeIcon className={'icon ' + name.toLowerCase()} icon={faLemon} onClick={HandleProcess}/>
         <div className='level'> {level} </div>
         <div className= { isBusy ? 'revenue busy progressbar': 'revenue progressbar' }> 
           <div className='progress' style={{width: `${progress}%`, visibility: isBusy? 'visible' : 'hidden'}}></div>

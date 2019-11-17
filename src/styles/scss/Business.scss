@@ -12,15 +12,24 @@
 
 .business .icon {
   position: absolute;
-  width: 70px;
-  height: 70px;
-  background-color: purple;
-  margin: 5px;
+  width: 40px;
+  height: 40px;
+  //background-color: purple;
+  padding: 12px;
+  margin: 6px;
+  //color: yellow;
+  border-radius: 50%;
+  border:2px black solid;
+}
+
+.business .icon.lemon{
+  color: yellow;
 }
 
 .business .icon:hover {
   cursor: pointer;
 }
+
 
 .business .level {
   position: absolute;
