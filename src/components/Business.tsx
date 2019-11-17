@@ -11,7 +11,8 @@ import { increaseMoney } from '../modules/player';
 type BusinessProps = {
   type: string
 };
-const PROGRESS_INTERVAL_TIME = 100;
+const PROGRESS_INTERVAL_TIME = 70;
+
 const Business: React.FC<BusinessProps> = (props) => {
   const [count, setCount] = useState(0);
   let business = useBusiness(props.type);
@@ -41,7 +42,10 @@ const Business: React.FC<BusinessProps> = (props) => {
     <div className='business'>
         <FontAwesomeIcon className='icon' icon={faLemon} onClick={HandleClick}/>
         <div className='level'> {business.level} </div>
-        <div className={business.state === 'BUSY' ? 'revenue busy progressbar': 'revenue progressbar'}> 
+        <div className=
+          {
+            business.state === 'BUSY' ? 'revenue busy progressbar': 'revenue progressbar'
+          }> 
           <div className='progress' style={{width: `${business.progress}%`, visibility: (`${visibilityProgress}` as any)}}></div>
           <div>{business.revenue}</div>
         </div>

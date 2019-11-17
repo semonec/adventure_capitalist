@@ -13,6 +13,9 @@
   background-color: purple;
   margin: 5px;
 }
+.business .icon:hover {
+  cursor: pointer;
+}
 
 .business .level {
   position: absolute;
@@ -60,6 +63,7 @@
 }
 
 .business .upgrade {
+  display: block;
   position: absolute;
   margin: 5px; 
   left: 75px;
@@ -69,6 +73,12 @@
   background-color: chocolate;
   text-align: center;
   bottom: 0;
+
+}
+
+.business .upgrade:hover {
+  color: #ed1212;
+  cursor: pointer;
 }
 
 .business .duration {
