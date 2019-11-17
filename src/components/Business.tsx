@@ -21,22 +21,25 @@ const Business: React.FC<BusinessProps> = (props) => {
 
   const dispatch = useDispatch();
 
-  const changeState = changeStateActions[name];
   const isBusy = state === 'BUSY' ? true : false;
 
-  const interval = useInterval(() => {
+  useInterval(() => {
     dispatch(progressActions[name]( count / duration * 100));
     setCount(count => count + PROGRESS_INTERVAL_TIME);
   }, isBusy ? PROGRESS_INTERVAL_TIME : null);
 
   if (isBusy && count >= duration) {
-    dispatch(changeState('IDLE'));
+    dispatch(changeStateActions[name]('IDLE'));
     dispatch(increaseMoney(revenue));
     setCount(0);
   }
 
+  /*
+   * Controlling onClick events
+   * It couldn't be maed in other classes or functions because react hook only could run in the functional component.
+   */
   const HandleProcess = (e: any) => {
-    state !== 'BUSY' && dispatch(changeState('BUSY'));
+    state !== 'BUSY' && dispatch(changeStateActions[name]('BUSY'));
   }
 
   const HandleUpgrade = (e: any) => {
@@ -47,23 +50,16 @@ const Business: React.FC<BusinessProps> = (props) => {
     }
   }
 
-  const visibilityProgress = isBusy? 'visible' : 'hidden';
-  const time = msToHHMMSS(duration - (isBusy ?  count : 0));
-  
-  const upgradeClassName = 'upgrade' + (levelUpCost <= money ? '' : ' disable');
   return (
     <div className='business'>
         <FontAwesomeIcon className='icon' icon={faLemon} onClick={HandleProcess}/>
         <div className='level'> {level} </div>
-        <div className=
-          {
-            isBusy ? 'revenue busy progressbar': 'revenue progressbar'
-          }> 
-          <div className='progress' style={{width: `${progress}%`, visibility: (`${visibilityProgress}` as any)}}></div>
+        <div className= { isBusy ? 'revenue busy progressbar': 'revenue progressbar' }> 
+          <div className='progress' style={{width: `${progress}%`, visibility: isBusy? 'visible' : 'hidden'}}></div>
           <div className='textbox'>{revenue}</div>
         </div>
-        <div className={upgradeClassName} onClick={HandleUpgrade}> {levelUpCost} </div>
-        <div className='duration'> {time} </div>
+        <div className={'upgrade' + (levelUpCost <= money ? '' : ' disable')} onClick={HandleUpgrade}> {levelUpCost} </div>
+        <div className='duration'> {msToHHMMSS(duration - (isBusy ?  count : 0))} </div>
 
     </div>
   );
