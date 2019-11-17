@@ -32,7 +32,7 @@ export function generateBusinessState(name: string): Reducer<any, any> {
   const PROGRESS = `business/PROGRESS_${name}`;
 
   const changeState = createAction(CHANGE_STATUS)<BusinessStatusType>();
-  const levelUp = createAction(LEVEL_UP)<number>();
+  const levelUp = createAction(LEVEL_UP)();
   const progress = createAction(PROGRESS)<number>();
 
   const actions = { changeState, levelUp, progress };
@@ -67,6 +67,12 @@ export function generateBusinessState(name: string): Reducer<any, any> {
       { 
         ...state,
         progress: action.payload 
+      }
+    ))
+    .handleAction(levelUp, (state) =>(
+      { 
+        ...state,
+        level: state.level + 1
       }
     ));
 }
