@@ -1,0 +1,84 @@
+.business {
+  position:relative;
+  display: block;
+  height: 120px;
+  background-color: aquamarine;
+  margin: 10px;
+}
+
+.business .icon {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  background-color: purple;
+  margin: 5px;
+}
+
+.business .level {
+  position: absolute;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+  width: 70px;
+  height: 35px;
+  line-height: 35px; // text align vertically middle
+  background-color: darkcyan;
+  text-align: center;
+  bottom: 0px;
+}
+
+.business .revenue {
+  position: absolute;
+  margin: 5px; 
+  left: 75px;
+  top: -0;
+  width: 415px;
+  background-color: burlywood;
+  height: 55px;
+  text-align: center;
+  line-height: 55px; // text align vertically middle
+}
+
+.business .revenue.busy {
+  position: absolute;
+  margin: 5px; 
+  left: 75px;
+  top: -0;
+  width: 415px;
+  background-color: whitesmoke;
+  height: 55px;
+  text-align: center;
+  line-height: 55px; // text align vertically middle
+}
+
+.business .progress {
+  background-color: green;
+  margin: 5px;
+  height: 45px;
+  width: 0;
+  transition: width 100ms ease-in-out;
+}
+
+.business .upgrade {
+  position: absolute;
+  margin: 5px; 
+  left: 75px;
+  width: 300px;
+  height: 50px;
+  line-height: 50px; // text align vertically middle
+  background-color: chocolate;
+  text-align: center;
+  bottom: 0;
+}
+
+.business .duration {
+  position: absolute;
+  margin: 5px; 
+  left: 380px;
+  width: 110px;
+  height: 50px;
+  line-height: 50px; // text align vertically middle
+  background-color: khaki;
+  text-align: center;
+  bottom: 0;
+}

@@ -1,0 +1,15 @@
+.left-panel {
+  float: left;
+  width: 250px;
+  height: 500px;
+  background-color:#234234;
+}
+
+.right-panel {
+  position: relative;
+  display: inline-block;
+  width: 600px;
+  height: 600px;
+  background-color:#666666;
+  margin-left:10px;
+}

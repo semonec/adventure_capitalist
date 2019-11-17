@@ -1,44 +1,52 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Adventure Capitalist
 
-## Available Scripts
+## Architecture
 
-In the project directory, you can run:
+### Flux data flow
 
-### `yarn start`
+- In a reactive UI, mvc is not good at scalable.
+- flux pattern, one way data flows, organized with action, dispatcher, store, view  architecture
+- Implemented with redux
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### directory 
 
-### `yarn test`
+- **src/components**
+  - views
+- **src/modules**
+  - store, actions, dispatchers
+- **src/services**
+- **src/hooks**
+  - controlls async functions
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Requirements
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+### Spec Requirements
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Buy and upgrade businesses
+- Make money from a business (i.e. you click on a business and in a certain amount of time you get money – see web implementation above)
+- Hire managers, so that money is made automatically
+- When you close the game, next time you open it, you should see the money that your businesses made for you
+- The implementation should have several business types to choose from
 
-### `yarn eject`
+### Tech Requirements
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+-  Must be built in a dialect of JavaScript: ES5, ES6, ESNext, TypeScript
+-  The UI can be anything: Visual, textual, even a fullscreen CLI works.
+- We expect you to put focus on at least one of the following topics:
+  - Visual polish: Beautiful design and/or graphics.
+  - Extra features: Going beyond MVP functionality.
+  - Server component: Creating a full-stack app.
+- Write your README as if it was for a production service, including:
+  - Description of the problem and solution.
+  - Whether the solution focuses on back-end, front-end or if it's full stack.
+  - Reasoning behind your technical choices, including architectural.
+  - Trade-offs you might have made, anything you left out, or what you might do
+differently if you were to spend additional time on the project.
+  - Link to to the hosted application if applicable.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Assets
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+get from awesome fonts [https://fontawesome.com/icons/lemon]
