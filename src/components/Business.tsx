@@ -7,6 +7,7 @@ import useInterval from '../hooks/useInterval';
 import  { useDispatch } from 'react-redux';
 import { changeStateActions, progressActions } from '../modules/index';
 import { increaseMoney } from '../modules/player';
+import { msToHHMMSS } from '../tools/util';
 
 type BusinessProps = {
   type: string
@@ -20,13 +21,14 @@ const Business: React.FC<BusinessProps> = (props) => {
 
   const changeState = changeStateActions[business.name];
   const progress = progressActions[business.name];
+  const isBusy = business.state === 'BUSY' ? true : false;
 
   const interval = useInterval(() => {
     dispatch(progress( count / business.duration * 100));
     setCount(count => count + PROGRESS_INTERVAL_TIME);
-  }, business.state === 'BUSY' ? PROGRESS_INTERVAL_TIME : null);
+  }, isBusy ? PROGRESS_INTERVAL_TIME : null);
 
-  if (business.state === 'BUSY' && count >= business.duration) {
+  if (isBusy && count >= business.duration) {
     dispatch(changeState('IDLE'));
     dispatch(increaseMoney(business.revenue));
     setCount(0);
@@ -36,21 +38,22 @@ const Business: React.FC<BusinessProps> = (props) => {
     business.state !== 'BUSY' && dispatch(changeState('BUSY'));
   }
 
-  const visibilityProgress = business.state === 'BUSY'? 'visible' : 'hidden';
-
+  const visibilityProgress = isBusy? 'visible' : 'hidden';
+  const time = msToHHMMSS(business.duration - (isBusy ?  count : 0));
+  
   return (
     <div className='business'>
         <FontAwesomeIcon className='icon' icon={faLemon} onClick={HandleClick}/>
         <div className='level'> {business.level} </div>
         <div className=
           {
-            business.state === 'BUSY' ? 'revenue busy progressbar': 'revenue progressbar'
+            isBusy ? 'revenue busy progressbar': 'revenue progressbar'
           }> 
           <div className='progress' style={{width: `${business.progress}%`, visibility: (`${visibilityProgress}` as any)}}></div>
           <div>{business.revenue}</div>
         </div>
         <div className='upgrade'> {business.levelUpCost} </div>
-        <div className='duration'> {business.duration} </div>
+        <div className='duration'> {time} </div>
 
     </div>
   );
