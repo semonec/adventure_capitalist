@@ -1,4 +1,5 @@
 import { promisify } from "util";
+import staticdata from '../assets/staticdata/Business.json';
 
 export default class StaticDataService {
   constructor() {
@@ -12,20 +13,12 @@ export default class StaticDataService {
       return (window as any).staticDataService;
   }
 
-  init() {
-    
-  }
-
-  private readJson(filename: string) {
-    if(window) {
-      return require('jQuery').get(filename,{}).then(function (contents) {
-        return contents;
-      });
-    } else{
-      var readFile = promisify(require('fs').readFile);
-      return readFile(filename).then(function (contents) {
-        return JSON.parse(contents);
-      });
+  getBusinessItem( name: string, level: number) {
+    let items = staticdata.business[name];
+    if (!!items) {
+      let item = items.find(i => i.level === level);
+      return item;
     }
+    return undefined;
   }
 }

@@ -6,6 +6,7 @@ import {
 } from 'typesafe-actions';
 import { Reducer } from 'react';
 import { changeStateActions, levelUpActions, progressActions } from './index';
+import StaticDataService from '../services/staticdataLoader';
 
 export type BusinessInitData = {
   name: string,
@@ -45,13 +46,11 @@ export function generateBusinessState(name: string): Reducer<any, any> {
 
 
   //  TODO: get initial date from static data
+  let initialData = StaticDataService.getInstance().getBusinessItem(name, 1);
   let initialState = {
     name,
     state: 'LOCKED' as BusinessStatusType,
-    duration: 4000,
-    level: 1,
-    levelUpCost: 10, 
-    revenue: 10,
+    ...initialData,
     progress: 0
   };
 
@@ -69,11 +68,13 @@ export function generateBusinessState(name: string): Reducer<any, any> {
         progress: action.payload 
       }
     ))
-    .handleAction(levelUp, (state) =>(
-      { 
+    .handleAction(levelUp, (state) =>{
+      let nextData = StaticDataService.getInstance().getBusinessItem(name, state.level + 1);
+
+      return { 
         ...state,
-        level: state.level + 1
+        ...nextData
       }
-    ));
+    });
 }
 
