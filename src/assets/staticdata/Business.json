@@ -1,0 +1,75 @@
+{
+    "business":
+    {
+        "LEMON":
+        [
+            {"level": 1, "levelUpCost": 10, "revenue": 10, "duration": 4000},
+            {"level": 2, "levelUpCost": 12, "revenue": 12, "duration": 4000},
+            {"level": 3, "levelUpCost": 14, "revenue": 14, "duration": 4000},
+            {"level": 4, "levelUpCost": 16, "revenue": 16, "duration": 4000},
+            {"level": 5, "levelUpCost": 18, "revenue": 18, "duration": 4000},
+            {"level": 6, "levelUpCost": 20, "revenue": 20, "duration": 3000},
+            {"level": 7, "levelUpCost": 24, "revenue": 22, "duration": 3000},
+            {"level": 8, "levelUpCost": 28, "revenue": 24, "duration": 3000},
+            {"level": 9, "levelUpCost": 32, "revenue": 26, "duration": 3000},
+            {"level": 10, "levelUpCost": 36, "revenue": 28, "duration": 3000},
+            {"level": 11, "levelUpCost": 44, "revenue": 30, "duration": 2000},
+            {"level": 12, "levelUpCost": 52, "revenue": 32, "duration": 2000},
+            {"level": 13, "levelUpCost": 60, "revenue": 34, "duration": 2000},
+            {"level": 14, "levelUpCost": 68, "revenue": 36, "duration": 2000},
+            {"level": 15, "levelUpCost": 76, "revenue": 38, "duration": 2000},
+            {"level": 16, "levelUpCost": 86, "revenue": 40, "duration": 1600},
+            {"level": 17, "levelUpCost": 96, "revenue": 42, "duration": 1600},
+            {"level": 18, "levelUpCost": 106, "revenue": 44, "duration": 1600},
+            {"level": 19, "levelUpCost": 116, "revenue": 46, "duration": 1600},
+            {"level": 20, "levelUpCost": 126, "revenue": 48, "duration": 1600}
+        ],
+        "NEWSPAPER":
+        [
+            {"level": 1, "levelUpCost": 100, "revenue": 100, "duration": 8000},
+            {"level": 2, "levelUpCost": 120, "revenue": 120, "duration": 8000},
+            {"level": 3, "levelUpCost": 140, "revenue": 140, "duration": 8000},
+            {"level": 4, "levelUpCost": 160, "revenue": 160, "duration": 8000},
+            {"level": 5, "levelUpCost": 180, "revenue": 180, "duration": 8000},
+            {"level": 6, "levelUpCost": 200, "revenue": 200, "duration": 7000},
+            {"level": 7, "levelUpCost": 240, "revenue": 220, "duration": 7000},
+            {"level": 8, "levelUpCost": 280, "revenue": 240, "duration": 7000},
+            {"level": 9, "levelUpCost": 320, "revenue": 260, "duration": 7000},
+            {"level": 10, "levelUpCost": 360, "revenue": 280, "duration": 7000},
+            {"level": 11, "levelUpCost": 440, "revenue": 300, "duration": 6000},
+            {"level": 12, "levelUpCost": 520, "revenue": 320, "duration": 6000},
+            {"level": 13, "levelUpCost": 600, "revenue": 340, "duration": 6000},
+            {"level": 14, "levelUpCost": 680, "revenue": 360, "duration": 6000},
+            {"level": 15, "levelUpCost": 760, "revenue": 380, "duration": 6000},
+            {"level": 16, "levelUpCost": 860, "revenue": 400, "duration": 5500},
+            {"level": 17, "levelUpCost": 960, "revenue": 420, "duration": 5500},
+            {"level": 18, "levelUpCost": 1060, "revenue": 440, "duration": 5500},
+            {"level": 19, "levelUpCost": 1160, "revenue": 460, "duration": 5500},
+            {"level": 20, "levelUpCost": 1260, "revenue": 480, "duration": 5500}
+        ],
+        "CAR_WASH":
+        [
+            {"level": 1, "levelUpCost": 1000, "revenue": 1000, "duration": 16000},
+            {"level": 2, "levelUpCost": 1200, "revenue": 1200, "duration": 16000},
+            {"level": 3, "levelUpCost": 1400, "revenue": 1400, "duration": 16000},
+            {"level": 4, "levelUpCost": 1600, "revenue": 1600, "duration": 16000},
+            {"level": 5, "levelUpCost": 1800, "revenue": 1800, "duration": 16000},
+            {"level": 6, "levelUpCost": 2000, "revenue": 2000, "duration": 12000},
+            {"level": 7, "levelUpCost": 2400, "revenue": 2200, "duration": 12000},
+            {"level": 8, "levelUpCost": 2800, "revenue": 2400, "duration": 12000},
+            {"level": 9, "levelUpCost": 3200, "revenue": 2600, "duration": 12000},
+            {"level": 10, "levelUpCost": 3600, "revenue": 2800, "duration": 12000},
+            {"level": 11, "levelUpCost": 4400, "revenue": 3000, "duration": 9000},
+            {"level": 12, "levelUpCost": 5200, "revenue": 3200, "duration": 9000},
+            {"level": 13, "levelUpCost": 6000, "revenue": 3400, "duration": 9000},
+            {"level": 14, "levelUpCost": 6800, "revenue": 3600, "duration": 9000},
+            {"level": 15, "levelUpCost": 7600, "revenue": 3800, "duration": 9000},
+            {"level": 16, "levelUpCost": 8600, "revenue": 4000, "duration": 5500},
+            {"level": 17, "levelUpCost": 9600, "revenue": 4200, "duration": 5500},
+            {"level": 18, "levelUpCost": 10600, "revenue": 4400, "duration": 5500},
+            {"level": 19, "levelUpCost": 11600, "revenue": 4600, "duration": 5500},
+            {"level": 20, "levelUpCost": 12600, "revenue": 4800, "duration": 5500}
+        ]
+
+    }
+}
