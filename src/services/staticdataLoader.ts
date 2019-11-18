@@ -21,4 +21,11 @@ export default class StaticDataService {
     }
     return undefined;
   }
+
+  getAvailableManagers(): string[] {
+    let result: string[] = [];
+    for (let key in staticdata.business)
+      result.push(key);
+    return result;
+  }
 }

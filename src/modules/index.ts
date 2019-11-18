@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { generateBusinessState, BusinessState } from './business';
 import player from './player';
+import manager from './managers';
 
 export const changeStateActions: any = {};
 export const levelUpActions: any = {};
@@ -12,7 +13,7 @@ let carWash = generateBusinessState('CAR_WASH');
 
 const rootReducer = combineReducers({
   lemon, newspaper, carWash,
-  player
+  player, manager
 });
 
 export default rootReducer;

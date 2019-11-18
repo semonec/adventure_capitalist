@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Money from '../components/Money';
 import Business from '../components/Business';
 import '../../src/styles/scss/Panel.scss';
+import Manager from '../components/Manager';
 
 type BusinessProps = {
   business: any[]
@@ -20,7 +21,7 @@ class App extends React.Component<BusinessProps> {
     return (
       <div>
         <div className='left-panel'>
-
+            <Manager />
         </div>
         <div className='right-panel'>
           <Money />

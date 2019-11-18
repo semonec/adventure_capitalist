@@ -49,4 +49,23 @@ differently if you were to spend additional time on the project.
 
 ## Assets
 
+
+## Tech description
+
+- Built with typescript.
+- Visual UI with React, redux, hooks
+- Focused on MVP 
+  - Considered scailing, used flux [http://fluxxor.com/what-is-flux.html]
+  - More view, more models makes complicated it's architecture.
+  - So, make one-way data flow, key definition of redux.
+
+### Problem had meet
+
+- Lack of knowledgement React hooks.
+  - It looks quite simple and awesome, so applied to this homework.
+  - but I never used this hooks, so whenever I tried to use hooks in the Container component or in the click handlers, it displays an error.
+- Making scailable business items
+  - want to create reducers with iterator, but if I create like that, redux store's name will be selected at runtime. so in the code side, it looks ugly, always attach `as any` keyword behind the redux state. tradeoff
+  
+
 get from awesome fonts [https://fontawesome.com/icons/lemon]
