@@ -1,0 +1,26 @@
+
+.manager-layer {
+    position: absolute;
+    top: 70px;
+    left: 70px;
+    width: 700px;
+    height: 400px;
+    background-color:rgba(128, 128, 128, 0.95);
+    z-index: 1;
+}
+
+.manager-layer-close-button {
+    position: relative;
+    float: right;
+    width: 50px;
+    height: 50px;
+    background-color: black;
+    font-size: 40px;
+    color: white;
+    text-align: center;
+    line-height: 50px;
+
+}
+.manager-layer-close-button:hover {
+    cursor: pointer;
+}
