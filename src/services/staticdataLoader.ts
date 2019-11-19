@@ -1,10 +1,22 @@
-import { promisify } from "util";
-import staticdata from 'assets/staticdata/Business.json';
+import businessData from 'assets/staticdata/Business.json';
+import managerData from 'assets/staticdata/Manager.json';
+
+
+export type ManagerType = {
+  'id': number;
+  'name': string;
+  'salary': number;
+  'effect': string,
+  'part' : string,
+  'description': string
+};
+
+export type AutomateManagerType = {
+  id: number;
+  part: string;
+};
 
 export default class StaticDataService {
-  constructor() {
-  }
-
   static getInstance(): StaticDataService {
     if (!(window as any).staticDataService) {
       (window as any).staticDataService = new StaticDataService();
@@ -14,7 +26,7 @@ export default class StaticDataService {
   }
 
   getBusinessItem( name: string, level: number) {
-    let items = staticdata.business[name];
+    let items = businessData.business[name];
     if (!!items) {
       let item = items.find(i => i.level === level);
       return item;
@@ -22,10 +34,15 @@ export default class StaticDataService {
     return undefined;
   }
 
-  getAvailableManagers(): string[] {
-    let result: string[] = [];
-    for (let key in staticdata.business)
-      result.push(key);
-    return result;
+  getAvailableManagers(): ManagerType[] {
+    return managerData.manager;
+  }
+
+  getAutomateManagers(): AutomateManagerType[] {
+    return managerData.manager
+      .filter(item => item.effect === 'AUTOMATIC')
+      .map(item => ({
+        id: item.id, part: item.part
+      }));
   }
 }

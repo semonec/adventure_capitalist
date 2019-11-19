@@ -24,3 +24,41 @@
 .manager-layer-close-button:hover {
     cursor: pointer;
 }
+
+.manager-layer-list {
+    text-align: center;
+    background-color: orangered;
+    overflow:scroll;
+    padding-top: 30px;
+    padding-bottom:30px;
+    height: 260px;
+    width: 100%;
+}
+.manager-item-root {
+    display: inline-block;
+    position: relative;
+    width: 80%;
+    height: 60px;
+    background-color: magenta;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+.manager-item-name {
+    font-size: 15pt;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.manager-item-description {
+    font-size: 10pt;
+}
+
+.manager-item-hire-button {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 80px;
+    height: 40px;
+    line-height: 40px;
+    background-color: skyblue;
+}

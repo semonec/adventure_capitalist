@@ -12,11 +12,6 @@ type BusinessProps = {
 };
 
 class App extends React.Component<BusinessProps> {
-
-  constructor(props: any) {
-    super(props);
-  }
-
   render() {
     return (
       <div>

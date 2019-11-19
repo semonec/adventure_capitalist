@@ -3,7 +3,6 @@ import {
   createAction,
   ActionType,
   createReducer,
-  action,
 } from 'typesafe-actions';
 
 const INCREASE_MONEY = `business/INCREASE_MONEY`;

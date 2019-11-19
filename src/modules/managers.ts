@@ -1,38 +1,42 @@
 import StaticDataService from 'services/staticdataLoader';
+import { ManagerType } from '../services/staticdataLoader';
 import {
   createAction,
   ActionType,
   createReducer
 } from 'typesafe-actions';
 
-const INIT_MANAGERS = `manager/INIT_MANAGERS`;
 const HIRE_MANAGER = `manager/HIRE_MANAGER`;
 const DISPLAY_MANAGER_POPUP = `manager/DISPLAY_MANAGER_POPUP`;
 
-export const initManagers = createAction(INIT_MANAGERS)<string[]>();
-export const hireManager = createAction(HIRE_MANAGER)<string>();
+export const hireManager = createAction(HIRE_MANAGER)<number>();
 export const displayManagerPopup = createAction(DISPLAY_MANAGER_POPUP)<boolean>();
 
-const actions = { initManagers, hireManager, displayManagerPopup };
+const actions = { hireManager, displayManagerPopup };
 
 type ManagerAction = ActionType<typeof actions>;
 
+
 export type ManagerState = {
-  available: string[];
+  list: ManagerType[];
   hired: {};
   isShown: boolean; // check if manager window is open
 }
 
-let available = StaticDataService.getInstance().getAvailableManagers();
+let list = StaticDataService.getInstance().getAvailableManagers();
 let initialState = {
-  available,
+  list,
   hired: {},
   isShown: false
 }
 
 let manager =  createReducer<ManagerState, ManagerAction>(initialState)
-  .handleAction(initManagers, (state, action) => ({...state, available: action.payload}))
-  .handleAction(hireManager, (state, action) => ({...state, hired: state.hired[action.payload]}))
+  .handleAction(hireManager, (state, action) => {
+    state.hired[action.payload] = true;
+    return {
+      ...state
+    }
+  })  
   .handleAction(displayManagerPopup, (state, action) => ({...state, isShown: action.payload}));
 
 export default manager;

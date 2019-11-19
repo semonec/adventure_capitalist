@@ -55,19 +55,18 @@ export function generateBusinessState(name: string): Reducer<any, any> {
   };
 
   return createReducer<BusinessState, BusinessAction>(initialState)
-    .handleAction(changeState, (state, action) =>(
+    .handleAction(changeState, (state, action) => 
+    (
       { 
         ...state,
         state: (action.payload as any),
         progress: 0
       }
     ))
-    .handleAction(progress, (state, action) =>(
-      { 
-        ...state,
-        progress: action.payload 
-      }
-    ))
+    .handleAction(progress, (state, action) => {
+      state.progress = action.payload;
+      return state;
+    })
     .handleAction(levelUp, (state) =>{
       let nextData = StaticDataService.getInstance().getBusinessItem(name, state.level + 1);
 

@@ -1,12 +1,33 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { ManagerType } from '../services/staticdataLoader';
+import { hireManager } from 'modules/managers';
 
-const ManagerItem: React.FC = (props) => {
+export type ManagerItemProps = {
+    info: ManagerType
+}
+
+const ManagerItem: React.FC<ManagerItemProps> = (props: ManagerItemProps) => {
+    let dispatch = useDispatch();
+    let handleHire = () => {
+        dispatch(hireManager(props.info.id))
+    }
+
     return (
-        <div>
-            <div className="manager-item-thumb"/>
-            <div className="manager-item-description"/>
-            <div className="manager-item-cost"/>
-            <div className="manager-item-hire-button"/>
+        <div className="manager-item-root">
+            <div className="manager-item-thumb"></div>
+            <div className="manager-item-name">
+                {props.info.name}
+            </div>
+            <div className="manager-item-description">
+                {props.info.description}
+            </div>
+            <div className="manager-item-cost">
+                $ {props.info.salary}
+            </div>
+            <div className="manager-item-hire-button" onClick={handleHire}>
+                Hire!
+            </div>
         </div>
     );
 }

@@ -1,0 +1,29 @@
+{
+  "manager":
+  [
+    {
+      "id": 1,
+      "name": "John",
+      "salary": 10,
+      "effect": "AUTOMATIC",
+      "part" : "LEMON",
+      "description": "Make lemon juice automaicially"
+    },
+    {
+      "id": 2,
+      "name": "James",
+      "salary": 10,
+      "effect": "AUTOMATIC",
+      "part" : "NEWSPAPER",
+      "description": "Make newspaper delivery automaicially"
+    },
+    {
+      "id": 3,
+      "name": "Jess",
+      "salary": 10,
+      "effect": "AUTOMATIC",
+      "part" : "CAR_WASH",
+      "description": "Make car wash automaicially"
+    }
+  ]
+}

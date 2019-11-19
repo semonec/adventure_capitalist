@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { generateBusinessState, BusinessState } from './business';
+import { generateBusinessState } from './business';
 import player from './player';
 import manager from './managers';
 
