@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import useBusiness from '../hooks/useBusiness';
-import  '../styles/scss/Business.scss';
+import useBusiness from 'hooks/useBusiness';
+import  'styles/scss/Business.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLemon, faNewspaper, faCar } from "@fortawesome/free-solid-svg-icons";
-import useInterval from '../hooks/useInterval';
+import useInterval from 'hooks/useInterval';
 import  { useDispatch, useSelector } from 'react-redux';
-import { changeStateActions, progressActions, RootState, levelUpActions } from '../modules/index';
-import { increaseMoney, decreaseMoney } from '../modules/player';
-import { msToHHMMSS } from '../tools/util';
+import { changeStateActions, progressActions, RootState, levelUpActions } from 'modules/index';
+import { increaseMoney, decreaseMoney } from 'modules/player';
+import { msToHHMMSS } from 'tools/util';
 
 type BusinessProps = {
   type: string

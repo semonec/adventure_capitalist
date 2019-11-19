@@ -1,5 +1,5 @@
 import { promisify } from "util";
-import staticdata from '../assets/staticdata/Business.json';
+import staticdata from 'assets/staticdata/Business.json';
 
 export default class StaticDataService {
   constructor() {

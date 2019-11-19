@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { RootState } from '../modules';
+import { RootState } from 'modules';
 import { connect } from 'react-redux';
-import Money from '../components/Money';
-import Business from '../components/Business';
-import '../../src/styles/scss/Panel.scss';
-import Manager from '../components/Manager';
+import Money from 'components/Money';
+import Business from 'components/Business';
+import 'styles/scss/Panel.scss';
+import Manager from 'components/Manager';
 
 type BusinessProps = {
   business: any[]

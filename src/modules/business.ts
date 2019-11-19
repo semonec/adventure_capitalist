@@ -6,7 +6,7 @@ import {
 } from 'typesafe-actions';
 import { Reducer } from 'react';
 import { changeStateActions, levelUpActions, progressActions } from './index';
-import StaticDataService from '../services/staticdataLoader';
+import StaticDataService from 'services/staticdataLoader';
 
 export type BusinessInitData = {
   name: string,

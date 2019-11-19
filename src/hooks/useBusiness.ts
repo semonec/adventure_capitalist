@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { RootState } from '../modules';
+import { RootState } from 'modules';
 
 export default function useBusiness(name: string) {
   const state = useSelector((state: RootState) => state);

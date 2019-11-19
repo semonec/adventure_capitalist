@@ -1,4 +1,4 @@
-import StaticDataService from '../services/staticdataLoader';
+import StaticDataService from 'services/staticdataLoader';
 import {
   createAction,
   ActionType,

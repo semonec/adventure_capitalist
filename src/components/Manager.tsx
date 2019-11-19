@@ -1,8 +1,8 @@
 import React from 'react';
-import {  displayManagerPopup } from '../modules/managers';
+import {  displayManagerPopup } from 'modules/managers';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../modules/index';
-import  '../styles/scss/Manager.scss';
+import { RootState } from 'modules/index';
+import  'styles/scss/Manager.scss';
  
 const Manager: React.FC = (props) => {
   let dispatch = useDispatch();

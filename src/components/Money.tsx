@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../modules';
-import  '../styles/scss/Money.scss';
+import { RootState } from 'modules';
+import  'styles/scss/Money.scss';
 
 const Money: React.FC = () => {
   const player = useSelector((state: RootState) => state.player);
