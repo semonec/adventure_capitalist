@@ -1,10 +1,13 @@
-export default class PlayerDataService {  
+export default class PlayerDataService {
+  private static instance: PlayerDataService;
+
   static getInstance(): PlayerDataService {
-    if (!(window as any).playerDataService) {
-     (window as any).playerDataService = new PlayerDataService();
-      return (window as any).playerDataService;
-    } else
-      return (window as any).playerDataService;
+    if (PlayerDataService.instance) {
+      return PlayerDataService.instance;
+    } else {
+      PlayerDataService.instance = new PlayerDataService();
+      return PlayerDataService.instance;
+    }
   }
 
   // store user data into localStorage
@@ -28,13 +31,16 @@ export default class PlayerDataService {
     let item = window.localStorage.getItem(business);
     return item !== null ? JSON.parse(item) : null;
   }
+
   storeUserManager(manager: any) {
     window.localStorage.setItem('manager', JSON.stringify(manager));
   }
+
   loadUserManager() {
     let item = window.localStorage.getItem('manager');
     return item !== null ? JSON.parse(item) : null;
   }
+
   calculateBackgroundEarned() {
     let cash = window.localStorage.getItem('cash');
     let time = window.localStorage.getItem('time');

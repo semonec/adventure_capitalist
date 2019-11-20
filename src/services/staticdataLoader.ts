@@ -16,13 +16,16 @@ export type AutomateManagerType = {
   part: string;
 };
 
-export default class StaticDataService {
+export default  class StaticDataService {
+  private static instance: StaticDataService;
+
   static getInstance(): StaticDataService {
-    if (!(window as any).staticDataService) {
-      (window as any).staticDataService = new StaticDataService();
-      return (window as any).staticDataService;
-    } else
-      return (window as any).staticDataService;
+    if (StaticDataService.instance) {
+      return StaticDataService.instance;
+    } else {
+      StaticDataService.instance = new StaticDataService();
+      return StaticDataService.instance;
+    }
   }
 
   getBusinessItem( name: string, level: number) {
