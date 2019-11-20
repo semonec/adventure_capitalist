@@ -28,6 +28,7 @@ const Business: React.FC<BusinessProps> = (props) => {
     setCount(count => count + PROGRESS_INTERVAL_TIME);
   }, isBusy ? PROGRESS_INTERVAL_TIME : null);
 
+  // if business task is finished
   if (isBusy && count >= duration) {
     dispatch(changeStateActions[name]('IDLE'));
     dispatch(increaseMoney(revenue));

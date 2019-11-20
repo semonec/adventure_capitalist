@@ -6,12 +6,21 @@ import Money from 'components/Money';
 import Business from 'components/Business';
 import 'styles/scss/Panel.scss';
 import Manager from 'components/Manager';
+import { store } from 'index';
+import PlayerDataService from '../services/playerDataService';
+import { increaseMoney } from '../modules/player';
 
 type BusinessProps = {
   business: any[]
 };
 
 class App extends React.Component<BusinessProps> {
+  constructor(props) {
+    super(props);
+    let loadedMoney = PlayerDataService.getInstance().loadUserMoney();
+    store.dispatch(increaseMoney(loadedMoney));
+  }
+
   render() {
     return (
       <div>
