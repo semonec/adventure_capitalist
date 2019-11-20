@@ -36,7 +36,6 @@ let initialState = {
 let manager =  createReducer<ManagerState, ManagerAction>(initialState)
   .handleAction(hireManager, (state, action) => {
     state.hired[action.payload] = true;
-      // console.log('hire action ---');
   PlayerDataService.getInstance().storeUserManager(state.hired);
     return state;
     // let newState = {

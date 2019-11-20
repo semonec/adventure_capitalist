@@ -50,7 +50,6 @@ const Business: React.FC<BusinessProps> = (props) => {
       dispatch(levelUp());
     }
   }
-  console.log('business === ',name, '--hired;', isManagerHired );
   if (isManagerHired) state !== 'BUSY' && dispatch(changeStateActions[name]('BUSY'))
   
   // set icon selector

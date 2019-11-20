@@ -52,21 +52,10 @@ export default class PlayerDataService {
     let parsedManager = JSON.parse(manager);
     let parsedBusiness = JSON.parse(business);
 
-    console.log(parsedManager, parsedBusiness, cash, backgrounded);
 
     // get hiredManager
-
     let hiredManager = parsedManager.list.filter((manager) => parsedManager.hired[manager.id] === true && manager.effect === 'AUTOMATIC')
-    console.log(hiredManager);
-
     if (hiredManager.length === 0)
       return 0;
-    
-    
-    //console.log('hasManagerItem', hasManagerItem);
-    
-    // let parsedManager = JSON.parse(manager);
-    // let hiredAutomatedManager = staticdata.getAutomateManagers().filter(managerData => parsedManager[managerData.id] );
-
   }
 } 
