@@ -5,9 +5,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLemon, faNewspaper, faCar, faQuestion } from "@fortawesome/free-solid-svg-icons";
 import useInterval from 'hooks/useInterval';
 import  { useDispatch, useSelector } from 'react-redux';
-import { changeStateActions, progressActions, RootState, levelUpActions } from 'modules/index';
+import { RootState } from 'modules/index';
 import { increaseMoney, decreaseMoney } from 'modules/player';
 import { msToHHMMSS } from 'tools/util';
+import { bizActions } from '../modules/business';
 
 type BusinessProps = {
   type: string
@@ -19,18 +20,19 @@ const Business: React.FC<BusinessProps> = (props) => {
   let { name, duration, state, progress, revenue, levelUpCost, level, isManagerHired } = useBusiness(props.type);
   let { money } = useSelector((state: RootState) => state.player);
 
-  const dispatch = useDispatch();
+  const { changeState: changeStateAction, levelUp: levelUpAction, progress: progressAction}  = bizActions.get(name);
 
+  const dispatch = useDispatch();
   const isBusy = state === 'BUSY' ? true : false;
 
   useInterval(() => {
-    dispatch(progressActions[name]( count / duration * 100));
+    dispatch(progressAction( count / duration * 100));
     setCount(count => count + PROGRESS_INTERVAL_TIME);
   }, isBusy ? PROGRESS_INTERVAL_TIME : null);
 
   // if business task is finished
   if (isBusy && count >= duration) {
-    dispatch(changeStateActions[name]('IDLE'));
+    dispatch(changeStateAction('IDLE'));
     dispatch(increaseMoney(revenue));
     setCount(0);
   }
@@ -40,17 +42,16 @@ const Business: React.FC<BusinessProps> = (props) => {
    * It couldn't be maed in other classes or functions because react hook only could run in the functional component.
    */
   const HandleProcess = (e: any) => {
-    !isManagerHired && state !== 'BUSY' && dispatch(changeStateActions[name]('BUSY'));
+    !isManagerHired && state !== 'BUSY' && dispatch(changeStateAction('BUSY'));
   }
 
   const HandleUpgrade = (e: any) => {
     if (levelUpCost <= money ) {
-      const levelUp = levelUpActions[name];
       dispatch(decreaseMoney(levelUpCost));
-      dispatch(levelUp());
+      dispatch(levelUpAction());
     }
   }
-  if (isManagerHired) state !== 'BUSY' && dispatch(changeStateActions[name]('BUSY'))
+  if (isManagerHired) state !== 'BUSY' && dispatch(changeStateAction('BUSY'))
   
   // set icon selector
   let icon = faQuestion;

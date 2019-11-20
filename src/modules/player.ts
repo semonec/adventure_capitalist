@@ -15,7 +15,7 @@ export const decreaseMoney = createAction(DECREASE_MONEY)<number>();
 export const restoreMoney = createAction(RESTORE_MONEY)<number>();
 
 const actions = { increaseMoney, decreaseMoney, restoreMoney };
-export type PlayerAction = ActionType<typeof actions>;
+type PlayerAction = ActionType<typeof actions>;
 
 export type PlayerState = {
   name: string;

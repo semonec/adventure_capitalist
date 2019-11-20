@@ -1,12 +1,7 @@
 import { combineReducers } from 'redux';
-import { generateBusinessState } from './business';
+import generateBusinessState from './business';
 import player from './player';
 import manager from './managers';
-
-export const changeStateActions: any = {};
-export const levelUpActions: any = {};
-export const progressActions: any = {};
-export const restoreActions: any = {};
 
 let lemon = generateBusinessState('LEMON');
 let newspaper = generateBusinessState('NEWSPAPER');

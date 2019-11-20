@@ -7,10 +7,10 @@ import Business from 'components/Business';
 import 'styles/scss/Panel.scss';
 import Manager from 'components/Manager';
 import { store } from 'index';
-import PlayerDataService from '../services/playerDataService';
-import { restoreMoney } from '../modules/player';
-import { restoreActions } from '../modules/index';
-import { restoreManager } from '../modules/managers';
+import PlayerDataService from 'services/playerDataService';
+import { restoreMoney } from 'modules/player';
+import { bizActions } from 'modules/business';
+import { restoreManager } from 'modules/managers';
 
 type BusinessProps = {
   business: any[]
@@ -32,7 +32,10 @@ class App extends React.Component<BusinessProps> {
     if (loadedBusiness !== null && loadedBusiness.length ) {
       loadedBusiness.forEach(item => {
         // if stroed ( state changed or level-up), then restore
-        item && item.name && store.dispatch(restoreActions[item.name](item)); 
+        if (item && item.name) {
+          let { restore } = bizActions.get(item.name);
+          store.dispatch(restore(item)); 
+        }
       })
     }
 
