@@ -10,6 +10,7 @@ import { store } from 'index';
 import PlayerDataService from '../services/playerDataService';
 import { restoreMoney } from '../modules/player';
 import { restoreActions } from '../modules/index';
+import { restoreManager } from '../modules/managers';
 
 type BusinessProps = {
   business: any[]
@@ -18,16 +19,26 @@ type BusinessProps = {
 class App extends React.Component<BusinessProps> {
   constructor(props) {
     super(props);
+    this.loadPrevious(props);
+  }
+
+  loadPrevious(props: BusinessProps) {
+    // load previous money
     let loadedMoney = PlayerDataService.getInstance().loadUserMoney();
-    store.dispatch(restoreMoney(loadedMoney));
+    store.dispatch(restoreMoney(loadedMoney)); // and restore it
+
+    // load each business item
     let loadedBusiness = props.business.map(item=> PlayerDataService.getInstance().loadUserBusiness(item.name));
-    console.log('loadedBusiness', loadedBusiness);
     if (loadedBusiness !== null && loadedBusiness.length ) {
       loadedBusiness.forEach(item => {
-        console.log('item', item);
-        item && item.name && store.dispatch(restoreActions[item.name](item));
+        // if stroed ( state changed or level-up), then restore
+        item && item.name && store.dispatch(restoreActions[item.name](item)); 
       })
     }
+
+    // load manager
+    let loadedHired = PlayerDataService.getInstance().loadUserManager();
+    loadedHired && store.dispatch(restoreManager(loadedHired));
   }
 
   render() {

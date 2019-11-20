@@ -1,5 +1,6 @@
 import StaticDataService from 'services/staticdataLoader';
 import { ManagerType } from '../services/staticdataLoader';
+import PlayerDataService from '../services/playerDataService';
 import {
   createAction,
   ActionType,
@@ -8,11 +9,13 @@ import {
 
 const HIRE_MANAGER = `manager/HIRE_MANAGER`;
 const DISPLAY_MANAGER_POPUP = `manager/DISPLAY_MANAGER_POPUP`;
+const RESTORE_MANAGER = `manager/RESTORE_MANAGER`;
 
 export const hireManager = createAction(HIRE_MANAGER)<number>();
 export const displayManagerPopup = createAction(DISPLAY_MANAGER_POPUP)<boolean>();
+export const restoreManager = createAction(RESTORE_MANAGER)<{}>();
 
-const actions = { hireManager, displayManagerPopup };
+const actions = { hireManager, displayManagerPopup, restoreManager };
 
 type ManagerAction = ActionType<typeof actions>;
 
@@ -33,10 +36,14 @@ let initialState = {
 let manager =  createReducer<ManagerState, ManagerAction>(initialState)
   .handleAction(hireManager, (state, action) => {
     state.hired[action.payload] = true;
+
+    PlayerDataService.getInstance().storeUserManager(state.hired);
+
     return {
       ...state
     }
-  })  
+  })
+  .handleAction(restoreManager, (state, action) => ({ ...state, hire: action.payload }))
   .handleAction(displayManagerPopup, (state, action) => ({...state, isShown: action.payload}));
 
 export default manager;

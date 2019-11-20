@@ -31,7 +31,10 @@ export default class PlayerDataService {
   storeUserManager(manager: any) {
     window.localStorage.setItem('manager', JSON.stringify(manager));
   }
-
+  loadUserManager() {
+    let item = window.localStorage.getItem('manager');
+    return item !== null ? JSON.parse(item) : null;
+  }
   calculateBackgroundEarned() {
     let cash = window.localStorage.getItem('cash');
     let time = window.localStorage.getItem('time');
