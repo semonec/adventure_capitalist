@@ -8,7 +8,8 @@ import 'styles/scss/Panel.scss';
 import Manager from 'components/Manager';
 import { store } from 'index';
 import PlayerDataService from '../services/playerDataService';
-import { increaseMoney } from '../modules/player';
+import { restoreMoney } from '../modules/player';
+import { restoreActions } from '../modules/index';
 
 type BusinessProps = {
   business: any[]
@@ -18,7 +19,15 @@ class App extends React.Component<BusinessProps> {
   constructor(props) {
     super(props);
     let loadedMoney = PlayerDataService.getInstance().loadUserMoney();
-    store.dispatch(increaseMoney(loadedMoney));
+    store.dispatch(restoreMoney(loadedMoney));
+    let loadedBusiness = props.business.map(item=> PlayerDataService.getInstance().loadUserBusiness(item.name));
+    console.log('loadedBusiness', loadedBusiness);
+    if (loadedBusiness !== null && loadedBusiness.length ) {
+      loadedBusiness.forEach(item => {
+        console.log('item', item);
+        item && item.name && store.dispatch(restoreActions[item.name](item));
+      })
+    }
   }
 
   render() {

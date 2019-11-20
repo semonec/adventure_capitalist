@@ -6,6 +6,7 @@ import manager from './managers';
 export const changeStateActions: any = {};
 export const levelUpActions: any = {};
 export const progressActions: any = {};
+export const restoreActions: any = {};
 
 let lemon = generateBusinessState('LEMON');
 let newspaper = generateBusinessState('NEWSPAPER');

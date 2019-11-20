@@ -1,9 +1,4 @@
-import StaticDataService from './staticdataLoader';
-
 export default class PlayerDataService {  
-
-  constructor() {
-  }
   static getInstance(): PlayerDataService {
     if (!(window as any).playerDataService) {
      (window as any).playerDataService = new PlayerDataService();
@@ -22,22 +17,19 @@ export default class PlayerDataService {
 
   loadUserMoney(): number {
     let cash = window.localStorage.getItem('cash');
-    if (cash !== null)
-      return Number.parseInt(cash);
-    else
-      return 0;
+    return cash !== null ? Number.parseInt(cash) : 0;
   }
 
   storeUserBusiness(business: any) {
     window.localStorage.setItem(business.name, JSON.stringify(business));
-    window.localStorage.setItem('time', new Date().getTime().toString());
   }
+
   loadUserBusiness(business: any) {
-    
+    let item = window.localStorage.getItem(business);
+    return item !== null ? JSON.parse(item) : null;
   }
   storeUserManager(manager: any) {
     window.localStorage.setItem('manager', JSON.stringify(manager));
-    window.localStorage.setItem('time', new Date().getTime().toString());
   }
 
   calculateBackgroundEarned() {
@@ -49,7 +41,6 @@ export default class PlayerDataService {
     if (cash === null || time === null || business === null || manager === null)
       return 0;
 
-    let staticdata = StaticDataService.getInstance();
     // get time gap between saved time and current time
     let currentTime = new Date().getTime();
     let backgrounded = currentTime - Number.parseInt(time);
