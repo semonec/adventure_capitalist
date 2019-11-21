@@ -1,29 +1,34 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { ManagerType } from '../services/staticdataLoader';
-import { hireManager } from 'modules/managers';
+import { hireManagerAction, ManagerType } from 'modules/managers';
+import { bizActions } from 'modules/business';
 
 export type ManagerItemProps = {
     info: ManagerType
 }
 
 const ManagerItem: React.FC<ManagerItemProps> = (props: ManagerItemProps) => {
-    let dispatch = useDispatch();
-    let handleHire = () => {
-        dispatch(hireManager(props.info.id))
+    const dispatch = useDispatch();
+    const manager = props.info;
+
+    const handleHire = () => {
+        let { bizHireMgrAction } = bizActions.get(manager.part);
+        dispatch(hireManagerAction(manager.id)); // register to manager store, prevent hire already hired manager
+        // handling business action within type of each manager
+        bizHireMgrAction && dispatch(bizHireMgrAction(manager)); 
     }
 
     return (
         <div className="manager-item-root">
             <div className="manager-item-thumb"></div>
             <div className="manager-item-name">
-                {props.info.name}
+                {manager.name}
             </div>
             <div className="manager-item-description">
-                {props.info.description}
+                {manager.description}
             </div>
             <div className="manager-item-cost">
-                $ {props.info.salary}
+                $ {manager.salary}
             </div>
             <div className="manager-item-hire-button" onClick={handleHire}>
                 Hire!

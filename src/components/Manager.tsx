@@ -1,19 +1,19 @@
 import React from 'react';
-import {  displayManagerPopup } from 'modules/managers';
+import {  displayManagerPopupAction } from 'modules/managers';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'modules/index';
 import  'styles/scss/Manager.scss';
 import ManagerItem from './ManagerItem';
  
 const Manager: React.FC = (props) => {
-  let dispatch = useDispatch();
-  let {list, hired, isShown} = useSelector((state: RootState) => state.manager);
-  let displayList = list.filter( item => hired[item.id] !== true ).map(
+  const dispatch = useDispatch();
+  const {list, hired, isShown} = useSelector((state: RootState) => state.manager);
+  const displayList = list.filter( item => hired[item.id] !== true ).map(
     info => (<ManagerItem key={info.id} info={info} />)
   );
 
   const showManagerPopup = (value: boolean) => {
-    dispatch(displayManagerPopup(value));
+    dispatch(displayManagerPopupAction(value));
   }
 
 

@@ -17,41 +17,41 @@ const PROGRESS_INTERVAL_TIME = 70;
 
 const Business: React.FC<BusinessProps> = (props) => {
   const [count, setCount] = useState(0);
-  let { name, duration, state, progress, revenue, levelUpCost, level, isManagerHired } = useBusiness(props.type);
+  let { name, duration, state, progress, revenue, levelUpCost, level, isAutomated } = useBusiness(props.type);
   let { money } = useSelector((state: RootState) => state.player);
 
-  const { changeState: changeStateAction, levelUp: levelUpAction, progress: progressAction}  = bizActions.get(name);
+  const { bizChangeStateAction, bizLvlUpAction, bizProgressAction }  = bizActions.get(name);
 
   const dispatch = useDispatch();
   const isBusy = state === 'BUSY' ? true : false;
 
   useInterval(() => {
-    dispatch(progressAction( count / duration * 100));
+    dispatch(bizProgressAction( count / duration * 100));
     setCount(count => count + PROGRESS_INTERVAL_TIME);
   }, isBusy ? PROGRESS_INTERVAL_TIME : null);
 
   // if business task is finished
   if (isBusy && count >= duration) {
-    dispatch(changeStateAction('IDLE'));
+    dispatch(bizChangeStateAction('IDLE'));
     dispatch(increaseMoney(revenue));
     setCount(0);
   }
-
+  console.log('Business ', useBusiness(props.type));
   /*
    * Controlling onClick events
    * It couldn't be maed in other classes or functions because react hook only could run in the functional component.
    */
   const HandleProcess = (e: any) => {
-    !isManagerHired && state !== 'BUSY' && dispatch(changeStateAction('BUSY'));
+    dispatch(bizChangeStateAction('BUSY'));
   }
 
   const HandleUpgrade = (e: any) => {
     if (levelUpCost <= money ) {
       dispatch(decreaseMoney(levelUpCost));
-      dispatch(levelUpAction());
+      dispatch(bizLvlUpAction());
     }
   }
-  if (isManagerHired) state !== 'BUSY' && dispatch(changeStateAction('BUSY'))
+  isAutomated && dispatch(bizChangeStateAction('BUSY'));
   
   // set icon selector
   let icon = faQuestion;
@@ -70,7 +70,7 @@ const Business: React.FC<BusinessProps> = (props) => {
 
   return (
     <div className='business'>
-        <FontAwesomeIcon className={'icon ' + name.toLowerCase()} icon={icon} onClick={ isManagerHired ? undefined : HandleProcess }/>
+        <FontAwesomeIcon className={'icon ' + name.toLowerCase()} icon={icon} onClick={ isAutomated ? undefined : HandleProcess }/>
         <div className='level'> {level} </div>
         <div className= { isBusy ? 'revenue busy progressbar': 'revenue progressbar' }> 
           <div className='progress' style={{width: `${progress}%`, visibility: isBusy? 'visible' : 'hidden'}}></div>

@@ -1,5 +1,4 @@
 import StaticDataService from 'services/staticdataLoader';
-import { ManagerType } from '../services/staticdataLoader';
 import PlayerDataService from '../services/playerDataService';
 import {
   createAction,
@@ -7,15 +6,25 @@ import {
   createReducer
 } from 'typesafe-actions';
 
+
+export type ManagerType = {
+  'id': number;
+  'name': string;
+  'salary': number;
+  'effect': string,
+  'part' : string,
+  'description': string
+};
+
 const HIRE_MANAGER = `manager/HIRE_MANAGER`;
 const DISPLAY_MANAGER_POPUP = `manager/DISPLAY_MANAGER_POPUP`;
 const RESTORE_MANAGER = `manager/RESTORE_MANAGER`;
 
-export const hireManager = createAction(HIRE_MANAGER)<number>();
-export const displayManagerPopup = createAction(DISPLAY_MANAGER_POPUP)<boolean>();
-export const restoreManager = createAction(RESTORE_MANAGER)<{}>();
+export const hireManagerAction = createAction(HIRE_MANAGER)<number>();
+export const displayManagerPopupAction = createAction(DISPLAY_MANAGER_POPUP)<boolean>();
+export const restoreManagerAction = createAction(RESTORE_MANAGER)<{}>();
 
-const actions = { hireManager, displayManagerPopup, restoreManager };
+const actions = { hireManagerAction, displayManagerPopupAction, restoreManagerAction };
 
 type ManagerAction = ActionType<typeof actions>;
 
@@ -34,7 +43,7 @@ let initialState = {
 }
 
 let manager =  createReducer<ManagerState, ManagerAction>(initialState)
-  .handleAction(hireManager, (state, action) => {
+  .handleAction(hireManagerAction, (state, action) => {
     state.hired[action.payload] = true;
   PlayerDataService.getInstance().storeUserManager(state.hired);
     return state;
@@ -45,8 +54,8 @@ let manager =  createReducer<ManagerState, ManagerAction>(initialState)
     // newState.hired[action.payload] = true;
     // return newState;
   })
-  .handleAction(restoreManager, (state, action) => ({ ...state, hired: action.payload }))
-  .handleAction(displayManagerPopup, (state, action) => ({...state, isShown: action.payload}));
+  .handleAction(restoreManagerAction, (state, action) => ({ ...state, hired: action.payload }))
+  .handleAction(displayManagerPopupAction, (state, action) => ({...state, isShown: action.payload}));
 
 export default manager;
 

@@ -1,15 +1,6 @@
 import businessData from 'assets/staticdata/Business.json';
 import managerData from 'assets/staticdata/Manager.json';
-
-
-export type ManagerType = {
-  'id': number;
-  'name': string;
-  'salary': number;
-  'effect': string,
-  'part' : string,
-  'description': string
-};
+import { ManagerType } from 'modules/managers';
 
 export type AutomateManagerType = {
   id: number;

@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux';
 import { RootState } from 'modules';
-import StaticDataService from '../services/staticdataLoader';
+import { BusinessState } from 'modules/business';
 
-export default function useBusiness(name: string) {
+export default function useBusiness(name: string): BusinessState {
   const state = useSelector((state: RootState) => state);
   let businessItem;
 
@@ -13,7 +13,5 @@ export default function useBusiness(name: string) {
   }
   
   // check manager hired
-  let isManagerHired = StaticDataService.getInstance().getAutomateManagers().findIndex(item => 
-    state.manager.hired[item.id] === true && item.part === name) >= 0;
-  return {...businessItem, isManagerHired};
+  return businessItem;
 }
