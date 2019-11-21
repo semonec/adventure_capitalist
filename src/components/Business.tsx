@@ -10,12 +10,12 @@ import { increaseMoney, decreaseMoney } from 'modules/player';
 import { msToHHMMSS } from 'tools/util';
 import { bizActions } from '../modules/business';
 
-type BusinessProps = {
+type BusinessItemProps = {
   type: string
 };
 const PROGRESS_INTERVAL_TIME = 70;
 
-const Business: React.FC<BusinessProps> = (props) => {
+const Business: React.FC<BusinessItemProps> = (props) => {
   const [count, setCount] = useState(0);
   let { name, duration, state, progress, revenue, levelUpCost, level, isAutomated } = useBusiness(props.type);
   let { money } = useSelector((state: RootState) => state.player);
@@ -30,13 +30,13 @@ const Business: React.FC<BusinessProps> = (props) => {
     setCount(count => count + PROGRESS_INTERVAL_TIME);
   }, isBusy ? PROGRESS_INTERVAL_TIME : null);
 
-  // if business task is finished
+  // if business task is finished then change state as idle 
   if (isBusy && count >= duration) {
     dispatch(bizChangeStateAction('IDLE'));
     dispatch(increaseMoney(revenue));
     setCount(0);
   }
-  console.log('Business ', useBusiness(props.type));
+
   /*
    * Controlling onClick events
    * It couldn't be maed in other classes or functions because react hook only could run in the functional component.

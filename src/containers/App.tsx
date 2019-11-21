@@ -11,10 +11,15 @@ import PlayerDataService from 'services/playerDataService';
 import { restoreMoney } from 'modules/player';
 import { bizActions } from 'modules/business';
 import { restoreManagerAction } from 'modules/managers';
+import { BusinessState } from '../modules/business';
 
+/**
+ * Type for business items
+ * @param {}
+ */
 type BusinessProps = {
-  business: any[]
-};
+  business: (BusinessState | undefined)[]
+} | undefined;
 
 class App extends React.Component<BusinessProps> {
   constructor(props) {
@@ -23,12 +28,14 @@ class App extends React.Component<BusinessProps> {
   }
 
   loadPrevious(props: BusinessProps) {
+    if (!props || !props.business)
+      return;
     // load previous money
     let loadedMoney = PlayerDataService.getInstance().loadUserMoney();
     store.dispatch(restoreMoney(loadedMoney)); // and restore it
 
     // load each business item
-    let loadedBusiness = props.business.map(item=> PlayerDataService.getInstance().loadUserBusiness(item.name));
+    let loadedBusiness = props.business.map(item=> item && PlayerDataService.getInstance().loadUserBusiness(item.name));
     if (loadedBusiness !== null && loadedBusiness.length ) {
       loadedBusiness.forEach(item => {
         // if stroed ( state changed or level-up), then restore
@@ -53,11 +60,9 @@ class App extends React.Component<BusinessProps> {
         <div className='right-panel'>
           <Money />
           {
-            this.props.business.map((item, i) => {
-              return (
-                <Business type={item.name} key={i}/>
-              );
-            })
+            this.props 
+              && this.props.business 
+              && this.props.business.map((item, i) => item && <Business type={item.name} key={i}/>)
           }
         </div>
 

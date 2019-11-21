@@ -59,7 +59,6 @@ export type BusinessState = {
  */
 export const bizActions = new Map();
 
-
 /**
  * ### Create Business Reducer and register it's actions into map.
  * We can create each business item without duplicated code.
