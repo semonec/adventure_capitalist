@@ -46,7 +46,6 @@ export type BusinessState = {
   isAutomated: boolean;
 };
 
-
 /**
  * You can access business item's actions from here
  * Actions are below:

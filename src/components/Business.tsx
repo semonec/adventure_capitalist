@@ -10,17 +10,41 @@ import { increaseMoney, decreaseMoney } from 'modules/player';
 import { msToHHMMSS } from 'tools/util';
 import { bizActions } from '../modules/business';
 
+// Props for Business functional component
 type BusinessItemProps = {
   type: string
 };
+
+// Business item's icon selector. actually should have to obtain from asset, but I cann't get proper assets. 
+// so organize with font-awesome-icons
+// TODO: remove this and organize with icon assets as SCSS
+const ICON_FOR_BUSINESS_ITEM = {
+  'LEMON': faLemon,
+  'NEWSPAPER': faNewspaper,
+  'CAR_WASH': faCar
+};
+
+//time cost of each business progress's animation time
+// TODO: not to be const, changable with business item's duration
 const PROGRESS_INTERVAL_TIME = 70;
 
+/**
+ * Business item's react functional component
+ * It will draw Each busines item with icon, current level, revenue of item, upgrade cost are remained(while processing)
+ * duration(while idle) time
+ * Not only display these data, but allow click to icon and level up button,
+ * Dispatch actions to make it possible to start earning process or upgrade it's level.
+ * @param {BusinessItemProps} props Props from App Container Component component data from initial or loaded state
+ * @returns {JSX} will be rendered DOM tree.
+ */
 const Business: React.FC<BusinessItemProps> = (props) => {
+  // for progress drawing, it'll updated as state changes
   const [count, setCount] = useState(0);
+  //getting business items from props, which came from App Container component, initial value or previously played data
   let { name, duration, state, progress, revenue, levelUpCost, level, isAutomated } = useBusiness(props.type);
-  let { money } = useSelector((state: RootState) => state.player);
+  let { money } = useSelector((state: RootState) => state.player); // getting money information from redux store
 
-  const { bizChangeStateAction, bizLvlUpAction, bizProgressAction }  = bizActions.get(name);
+  const { bizChangeStateAction, bizLvlUpAction, bizProgressAction }  = bizActions.get(name); // dispatch action sets
 
   const dispatch = useDispatch();
   const isBusy = state === 'BUSY' ? true : false;
@@ -53,24 +77,9 @@ const Business: React.FC<BusinessItemProps> = (props) => {
   }
   isAutomated && dispatch(bizChangeStateAction('BUSY'));
   
-  // set icon selector
-  let icon = faQuestion;
-  switch (name) {
-    case 'LEMON':
-      icon = faLemon;
-      break;
-    case 'NEWSPAPER':
-      icon = faNewspaper;
-      break;
-    case 'CAR_WASH':
-      icon = faCar;
-      break;
-  }
-
-
   return (
     <div className='business'>
-        <FontAwesomeIcon className={'icon ' + name.toLowerCase()} icon={icon} onClick={ isAutomated ? undefined : HandleProcess }/>
+        <FontAwesomeIcon className={'icon ' + name.toLowerCase()} icon={ICON_FOR_BUSINESS_ITEM[name]} onClick={ isAutomated ? undefined : HandleProcess }/>
         <div className='level'> {level} </div>
         <div className= { isBusy ? 'revenue busy progressbar': 'revenue progressbar' }> 
           <div className='progress' style={{width: `${progress}%`, visibility: isBusy? 'visible' : 'hidden'}}></div>
