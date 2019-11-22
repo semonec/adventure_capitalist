@@ -26,7 +26,7 @@ const ICON_FOR_BUSINESS_ITEM = {
 
 //time cost of each business progress's animation time
 // TODO: not to be const, changable with business item's duration
-const PROGRESS_INTERVAL_TIME = 70;
+const PROGRESS_INTERVAL_TIME = 100;
 
 /**
  * Business item's react functional component
@@ -75,6 +75,7 @@ const Business: React.FC<BusinessItemProps> = (props) => {
       dispatch(bizLvlUpAction());
     }
   }
+  // every update, automated business item will try to change it's state as busy
   isAutomated && dispatch(bizChangeStateAction('BUSY'));
   
   return (

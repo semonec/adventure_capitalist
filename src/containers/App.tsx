@@ -21,18 +21,23 @@ type BusinessProps = {
   business: (BusinessState | undefined)[]
 } | undefined;
 
+/**
+ * App is the Main Container Component
+ */
 class App extends React.Component<BusinessProps> {
   constructor(props) {
     super(props);
     this.loadPrevious(props);
   }
 
+  // load previous user's played informaton from localStorage  
   loadPrevious(props: BusinessProps) {
     if (!props || !props.business)
       return;
-    // load previous money
+
+    // load previous money & background earned
     let loadedMoney = PlayerDataService.getInstance().loadUserMoney();
-    store.dispatch(restoreMoney(loadedMoney)); // and restore it
+    let currentTime = new Date().getTime();
 
     // load each business item
     let loadedBusiness = props.business.map(item=> item && PlayerDataService.getInstance().loadUserBusiness(item.name));
@@ -41,9 +46,14 @@ class App extends React.Component<BusinessProps> {
         // if stroed ( state changed or level-up), then restore
         if (item && item.name) {
           let { bizRestoreAction } = bizActions.get(item.name);
-          store.dispatch(bizRestoreAction(item)); 
+          store.dispatch(bizRestoreAction(item));
+
+          loadedMoney += PlayerDataService.getInstance().calculateBackgroundEarned(currentTime, item);
         }
-      })
+      });
+      
+      store.dispatch(restoreMoney(loadedMoney)); // and restore final money
+
     }
 
     // load manager
@@ -54,10 +64,10 @@ class App extends React.Component<BusinessProps> {
   render() {
     return (
       <div>
-        <div className='left-panel'>
+        <div className='top-panel'>
             <Manager />
         </div>
-        <div className='right-panel'>
+        <div className='bottom-panel'>
           <Money />
           {
             this.props 

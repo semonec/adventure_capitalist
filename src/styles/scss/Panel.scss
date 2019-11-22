@@ -1,11 +1,12 @@
-.left-panel {
-  float: left;
-  width: 250px;
-  height: 500px;
+.top-panel {
+  float: top;
+  width: 100%;
+  height: 50px;
   background-color:#234234;
+  text-align: center;
 }
 
-.right-panel {
+.bottom-panel {
   position: relative;
   display: inline-block;
   width: 600px;

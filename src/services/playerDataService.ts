@@ -1,3 +1,4 @@
+import { BusinessState } from '../modules/business';
 /**
  * Player's data save/load within localStorage
  * Currently not considered with fullstack development. so I'll store game data into localStorage only.
@@ -57,27 +58,18 @@ export default class PlayerDataService {
    * It will not the correct answer but, considerable value I think. 
    * @returns {number} gold that will be calculated whie backgrounded(off-lined) earnings + user earned
    */
-  calculateBackgroundEarned() {
-    let cash = window.localStorage.getItem('cash');
+  calculateBackgroundEarned(currentTime: number, business: BusinessState): number {
     let time = window.localStorage.getItem('time');
-    let business = window.localStorage.getItem('business');
-    let manager = window.localStorage.getItem('manager');
-
-    if (cash === null || time === null || business === null || manager === null)
+    if (time === null)
       return 0;
 
     // get time gap between saved time and current time
-    let currentTime = new Date().getTime();
     let backgrounded = currentTime - Number.parseInt(time);
     
     // calculate businessitem's revenue per ms, which has it's automation manager
-    let parsedManager = JSON.parse(manager);
-    let parsedBusiness = JSON.parse(business);
-
-
-    // get hiredManager
-    let hiredManager = parsedManager.list.filter((manager) => parsedManager.hired[manager.id] === true && manager.effect === 'AUTOMATIC')
-    if (hiredManager.length === 0)
-      return 0;
+    if (business.isAutomated) {
+      return Math.ceil(business.revenue/business.duration * backgrounded)
+    }
+    return 0;
   }
 } 

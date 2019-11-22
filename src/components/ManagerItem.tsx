@@ -7,10 +7,15 @@ export type ManagerItemProps = {
     info: ManagerType
 }
 
+/**
+ * ManagerItem Functional Component
+ * @param {ManagerType} props Manager item's data 
+ */
 const ManagerItem: React.FC<ManagerItemProps> = (props: ManagerItemProps) => {
     const dispatch = useDispatch();
     const manager = props.info;
 
+    // click handler when click hire button
     const handleHire = () => {
         let { bizHireMgrAction } = bizActions.get(manager.part);
         dispatch(hireManagerAction(manager.id)); // register to manager store, prevent hire already hired manager
