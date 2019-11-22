@@ -1,8 +1,8 @@
 
 .manager-layer {
     position: absolute;
-    top: 70px;
-    left: 70px;
+    left: 50%;
+    transform: translateX(-50%);
     width: 700px;
     height: 400px;
     background-color:rgba(128, 128, 128, 0.95);
@@ -61,4 +61,5 @@
     height: 40px;
     line-height: 40px;
     background-color: skyblue;
+    border-radius: 5px;
 }

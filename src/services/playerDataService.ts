@@ -62,13 +62,13 @@ export default class PlayerDataService {
     let time = window.localStorage.getItem('time');
     if (time === null)
       return 0;
-
     // get time gap between saved time and current time
     let backgrounded = currentTime - Number.parseInt(time);
     
-    // calculate businessitem's revenue per ms, which has it's automation manager
+    // calculate businessitem's # of cycle and remaind progress
     if (business.isAutomated) {
-      return Math.ceil(business.revenue/business.duration * backgrounded)
+      business.progress = ((backgrounded / business.duration) % 1) * 100
+      return business.revenue * Math.floor(backgrounded / business.duration);
     }
     return 0;
   }

@@ -11,7 +11,6 @@ export default function useBusiness(name: string): BusinessState {
       businessItem = (state as any)[i];
     }
   }
-  
   // check manager hired
   return businessItem;
 }

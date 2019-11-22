@@ -2,8 +2,19 @@
   float: top;
   width: 100%;
   height: 50px;
+  line-height: 50px;
   background-color:#234234;
   text-align: center;
+}
+
+.top-panel .manager-button {
+  border-radius: 5px;
+  background: #73AD21;
+  color: whitesmoke;
+  width: 150px;
+  height: 35px;
+  line-height: 35px;
+  display: inline-block;
 }
 
 .bottom-panel {

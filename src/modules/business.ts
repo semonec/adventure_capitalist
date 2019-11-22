@@ -129,7 +129,12 @@ export default function generateBusinessReducer(name: string): Reducer<BusinessS
       PlayerDataService.getInstance().storeUserBusiness(newState);
       return newState;
     })
-    .handleAction(bizRestoreAction, (state, action) => ({...action.payload}))
+    // .handleAction(bizRestoreAction, (state, action) => ({...action.payload}))
+    .handleAction(bizRestoreAction, (state, action) => {
+      console.log('--->bizRestoreAction--->', action.payload.progress);
+      return {...action.payload}
+    })
+
     .handleAction(bizLvlUpAction, (state) =>{
       const nextData = StaticDataService.getInstance().getBusinessItem(name, state.level + 1);
       const newState = { ...state, ...nextData };

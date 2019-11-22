@@ -60,10 +60,14 @@ const initialState: PlayerState = {
 // reducer for player information.
 const player = createReducer<PlayerState, PlayerAction>(initialState)
   .handleAction([increaseMoney, restoreMoney], (state, action) => {
-    PlayerDataService.getInstance().storeUserMoney(state.money + action.payload);
+    if (action.payload === 0)
+      return state;
+  action.type !== RESTORE_MONEY && PlayerDataService.getInstance().storeUserMoney(state.money + action.payload);
     return {...state, money: state.money + action.payload}
   })
   .handleAction(decreaseMoney, (state, action) => {
+    if (action.payload === 0)
+      return state;
     PlayerDataService.getInstance().storeUserMoney(state.money - action.payload);
     return {...state, money: state.money - action.payload};
   });

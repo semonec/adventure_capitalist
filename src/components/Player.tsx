@@ -6,14 +6,14 @@ import  'styles/scss/Money.scss';
 /**
  * Display current remaind money, Functional Component
  */
-const Money: React.FC = () => {
+const Player: React.FC = () => {
   const { player } = useSelector((state: RootState) => state);
 
   return (
     <div className='player'>
-      <p>{player.money}</p>
+      <p>Current: $ {player.money}</p>
     </div>
   );
 }
 
-export default Money;
+export default Player;

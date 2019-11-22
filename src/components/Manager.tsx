@@ -26,7 +26,7 @@ const Manager: React.FC = (props) => {
 
   return (
     <div>
-      <button className="manager-button" onClick={() => showManagerPopup(true)}>Manager</button>
+      <div className="manager-button" onClick={() => showManagerPopup(true)}> Manager </div>
       <div className="manager-layer" style={ isShown ? {} : {display: 'none'}}>
         <div className="manager-layer-close-button" onClick={() => showManagerPopup(false)}>X</div>
         <div className="manager-layer-list">

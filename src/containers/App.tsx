@@ -2,7 +2,7 @@ import React from 'react';
 
 import { RootState } from 'modules';
 import { connect } from 'react-redux';
-import Money from 'components/Money';
+import Player from 'components/Player';
 import Business from 'components/Business';
 import 'styles/scss/Panel.scss';
 import Manager from 'components/Manager';
@@ -11,7 +11,8 @@ import PlayerDataService from 'services/playerDataService';
 import { restoreMoney } from 'modules/player';
 import { bizActions } from 'modules/business';
 import { restoreManagerAction } from 'modules/managers';
-import { BusinessState } from '../modules/business';
+import { BusinessState } from 'modules/business';
+import 'styles/scss/App.scss';
 
 /**
  * Type for business items
@@ -33,7 +34,7 @@ class App extends React.Component<BusinessProps> {
   // load previous user's played informaton from localStorage  
   loadPrevious(props: BusinessProps) {
     if (!props || !props.business)
-      return;
+      return false;
 
     // load previous money & background earned
     let loadedMoney = PlayerDataService.getInstance().loadUserMoney();
@@ -46,14 +47,14 @@ class App extends React.Component<BusinessProps> {
         // if stroed ( state changed or level-up), then restore
         if (item && item.name) {
           let { bizRestoreAction } = bizActions.get(item.name);
-          store.dispatch(bizRestoreAction(item));
 
           loadedMoney += PlayerDataService.getInstance().calculateBackgroundEarned(currentTime, item);
+          store.dispatch(bizRestoreAction(item));
         }
       });
       
       store.dispatch(restoreMoney(loadedMoney)); // and restore final money
-
+      return 
     }
 
     // load manager
@@ -61,14 +62,15 @@ class App extends React.Component<BusinessProps> {
     loadedHired && store.dispatch(restoreManagerAction(loadedHired));
   }
 
+  
   render() {
     return (
-      <div>
+      <div className='app-layer'>
         <div className='top-panel'>
             <Manager />
         </div>
         <div className='bottom-panel'>
-          <Money />
+          <Player />
           {
             this.props 
               && this.props.business 
