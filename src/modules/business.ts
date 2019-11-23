@@ -131,7 +131,6 @@ export default function generateBusinessReducer(name: string): Reducer<BusinessS
     })
     // .handleAction(bizRestoreAction, (state, action) => ({...action.payload}))
     .handleAction(bizRestoreAction, (state, action) => {
-      console.log('--->bizRestoreAction--->', action.payload.progress);
       return {...action.payload}
     })
 

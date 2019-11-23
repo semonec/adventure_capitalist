@@ -52,7 +52,8 @@ class App extends React.Component<BusinessProps> {
           store.dispatch(bizRestoreAction(item));
         }
       });
-      
+      const loadedManager = PlayerDataService.getInstance().loadUserManager();
+      loadedManager && store.dispatch(restoreManagerAction(loadedManager));
       store.dispatch(restoreMoney(loadedMoney)); // and restore final money
       return 
     }

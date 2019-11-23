@@ -14,7 +14,6 @@ export type ManagerItemProps = {
 const ManagerItem: React.FC<ManagerItemProps> = (props: ManagerItemProps) => {
     const dispatch = useDispatch();
     const manager = props.info;
-
     // click handler when click hire button
     const handleHire = () => {
         let { bizHireMgrAction } = bizActions.get(manager.part);
